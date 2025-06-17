@@ -9,6 +9,15 @@ This repository provides a Progressive Web App (PWA) launcher to quickly access 
 [https://fuelcell-batterykpi-dashboard-zje68dj3yzc2gxcttryiua.streamlit.app/](https://fuelcell-batterykpi-dashboard-zje68dj3yzc2gxcttryiua.streamlit.app/)
 
 ---
+---
+
+## 📸 Preview
+
+<img src="logo_dashboard.jpg" alt="DMFC & Battery KPIs Preview" width="300"/>
+
+> Launch screen of the app with custom icon and dashboard access.
+
+---
 
 ## 📱 How to install it like a native app
 
