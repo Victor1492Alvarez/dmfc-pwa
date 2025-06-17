@@ -6,7 +6,7 @@
   <title>DMFC & Battery KPIs</title>
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#1e90ff">
-  <link rel="apple-touch-icon" href="icon-384x384.png">
+  <link rel="apple-touch-icon" href="icon-512x512.png">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
   <!-- Splash Screens for iOS Devices -->
@@ -40,12 +40,12 @@
     }
 
     img.logo-animated {
-      width: 220px;
-      height: 220px;
-      margin-top: 6vh;
+      width: 240px;
+      height: 240px;
+      margin-top: 7vh;
       opacity: 0;
       transform: scale(0.8);
-      animation: fadeZoom 1.2s ease-out forwards;
+      animation: fadeZoom 1.5s ease-out forwards;
     }
 
     @keyframes fadeZoom {
@@ -65,6 +65,27 @@
     p {
       font-size: 1.1em;
       margin-bottom: 30px;
+    }
+
+    .orientation-warning {
+      font-size: 0.95em;
+      color: #555;
+      margin-top: 10px;
+      margin-bottom: 20px;
+    }
+
+    .rotate-icon {
+      width: 40px;
+      height: 40px;
+      display: block;
+      margin: 0 auto 10px auto;
+      animation: rotateHint 2.5s infinite;
+    }
+
+    @keyframes rotateHint {
+      0%, 100% { transform: rotate(0deg); }
+      30% { transform: rotate(90deg); }
+      60% { transform: rotate(0deg); }
     }
 
     button {
@@ -88,6 +109,8 @@
 <body>
   <img src="icon-192x192.png" alt="App Icon" class="logo-animated" />
   <h1>DMFC & Battery KPIs</h1>
+  <img src="https://cdn-icons-png.flaticon.com/512/1828/1828884.png" class="rotate-icon" alt="Rotate Icon">
+  <p class="orientation-warning">For a better experience, please rotate your device to landscape mode.</p>
   <p>Tap below to launch the dashboard app:</p>
   <button onclick="window.location.href='https://fuelcell-batterykpi-dashboard-zje68dj3yzc2gxcttryiua.streamlit.app/'">
     🚀 Open App
