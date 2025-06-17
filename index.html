@@ -8,24 +8,26 @@
     <meta name="theme-color" content="#1e90ff">
     <link rel="apple-touch-icon" href="icon-192x192.png">
     <style>
-        body {
-            font-family: sans-serif;
-            text-align: center;
-            margin-top: 50px;
+    .logo-animated {
+    width: 150px;
+    height: 150px;
+    margin-top: 5vh;
+    opacity: 0;
+    transform: scale(0.8);
+    animation: fadeZoom 1.2s ease-out forwards;
+    }
+
+    @keyframes fadeZoom {
+    to {
+      opacity: 1;
+      transform: scale(1);
         }
-        button {
-            padding: 1em 2em;
-            font-size: 1.2em;
-            background-color: #1e90ff;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-        }
+    }    
     </style>
+
 </head>
 <body>
-    <img src="icon-192x192.png" alt="App Icon" style="max-width: 30vw; height: auto; margin-top: 5vh;" />
+    <img src="icon-192x192.png" alt="App Icon" class="logo-animated" />
     <h1>DMFC & Battery KPIs</h1>
     <p>Tap below to launch the dashboard app:</p>
     <button onclick="window.location.href='https://fuelcell-batterykpi-dashboard-zje68dj3yzc2gxcttryiua.streamlit.app/'">Open App</button>
