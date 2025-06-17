@@ -42,6 +42,16 @@ This dashboard was created by **Victor Alvarez Melendez**, Master’s student in
 The main dashboard was built in **Python using Streamlit**, and this repository wraps it in a mobile-friendly PWA experience.
 
 > Ideal for campers, engineers, researchers, or outdoor energy system planners.
+> ---
+
+## 📸 Preview
+
+<img src="logo_dashboard.jpg" alt="DMFC & Battery KPIs Preview" width="300"/>
+
+> Launch screen of the app with custom icon and dashboard access.
+
+---
+
 
 ---
 
