@@ -13,6 +13,14 @@
   <!-- ... (same splash links) ... -->
 
   <style>
+    /* Adjustable Variables: Modify these values to control the heartbeat logo */
+    :root {
+      --heartbeat-duration: 1.5s;      /* Duration of one heartbeat cycle */
+      --heartbeat-scale-up: 1.05;      /* Max scale during heartbeat */
+      --heartbeat-scale-down: 0.97;    /* Min scale during heartbeat */
+      --logo-width: 160px;             /* Width of the loading logo */
+    }
+
     body {
       font-family: 'Poppins', sans-serif;
       background: #ffffff;
@@ -40,8 +48,8 @@
 
     @keyframes heartbeat {
       0%, 100% { transform: scale(1); }
-      30% { transform: scale(var(--heartbeat-scale-up, 1.05)); }
-      60% { transform: scale(var(--heartbeat-scale-down, 0.97)); }
+      30% { transform: scale(var(--heartbeat-scale-up)); }
+      60% { transform: scale(var(--heartbeat-scale-down)); }
     }
 
     .loading-screen {
@@ -58,9 +66,9 @@
     }
 
     .loading-logo {
-      width: var(--logo-width, 160px);
+      width: var(--logo-width);
       height: auto;
-      animation: heartbeat var(--heartbeat-duration, 1.5s) infinite ease-in-out;
+      animation: heartbeat var(--heartbeat-duration) infinite ease-in-out;
     }
 
     h1 {
@@ -112,29 +120,9 @@
       background-color: #1978d4;
       transform: scale(1.03);
     }
-
-    details.controls {
-      margin-top: 25px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 10px;
-      font-size: 0.95em;
-    }
-
-    details.controls summary {
-      cursor: pointer;
-      font-weight: bold;
-      margin-bottom: 10px;
-    }
-
-    .controls label {
-      font-size: 0.95em;
-      font-weight: 500;
-    }
   </style>
 </head>
-<body style="--heartbeat-duration: 1.5s; --heartbeat-scale-up: 1.05; --heartbeat-scale-down: 0.97; --logo-width: 160px;">
+<body>
   <div class="loading-screen" id="loadingScreen">
     <img src="dashboard_logo.png" alt="Loading Logo" class="loading-logo">
   </div>
@@ -151,14 +139,6 @@
   <p>Tap below to launch your Performance Analyzer:</p>
   <button onclick="startApp()">Open App</button>
 
-  <details class="controls">
-    <summary>⚙️ Control Panel</summary>
-    <label>Duration: <input type="range" min="0.5" max="3" step="0.1" value="1.5" onchange="updateCSS('--heartbeat-duration', this.value + 's', 'duration')"></label>
-    <label>Scale Up: <input type="range" min="1" max="1.5" step="0.01" value="1.05" onchange="updateCSS('--heartbeat-scale-up', this.value, 'scaleUp')"></label>
-    <label>Scale Down: <input type="range" min="0.8" max="1" step="0.01" value="0.97" onchange="updateCSS('--heartbeat-scale-down', this.value, 'scaleDown')"></label>
-    <label>Logo Size: <input type="range" min="100" max="300" step="5" value="160" onchange="updateCSS('--logo-width', this.value + 'px', 'logoSize')"></label>
-  </details>
-
   <script>
     function startApp() {
       const loadingScreen = document.getElementById("loadingScreen");
@@ -166,25 +146,6 @@
       setTimeout(() => {
         window.location.href = "https://fuelcell-batterykpi-dashboard-zje68dj3yzc2gxcttryiua.streamlit.app/";
       }, 1000);
-    }
-
-    function updateCSS(varName, value, storageKey) {
-      document.body.style.setProperty(varName, value);
-      localStorage.setItem(storageKey, value);
-    }
-
-    // Restore saved settings
-    window.onload = () => {
-      const settings = [
-        ['--heartbeat-duration', 'duration'],
-        ['--heartbeat-scale-up', 'scaleUp'],
-        ['--heartbeat-scale-down', 'scaleDown'],
-        ['--logo-width', 'logoSize']
-      ];
-      settings.forEach(([cssVar, key]) => {
-        const saved = localStorage.getItem(key);
-        if (saved) document.body.style.setProperty(cssVar, saved);
-      });
     }
   </script>
 </body>
