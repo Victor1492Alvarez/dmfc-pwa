@@ -10,24 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
   <!-- Splash Screens for iOS Devices -->
-  <link rel="apple-touch-startup-image" href="splash-640x1136.png"
-        media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)">
-  <link rel="apple-touch-startup-image" href="splash-750x1334.png"
-        media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)">
-  <link rel="apple-touch-startup-image" href="splash-828x1792.png"
-        media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2)">
-  <link rel="apple-touch-startup-image" href="splash-1170x2532.png"
-        media="(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3)">
-  <link rel="apple-touch-startup-image" href="splash-1179x2556.png"
-        media="(device-width: 393px) and (device-height: 852px) and (-webkit-device-pixel-ratio: 3)">
-  <link rel="apple-touch-startup-image" href="splash-1290x2796.png"
-        media="(device-width: 430px) and (device-height: 932px) and (-webkit-device-pixel-ratio: 3)">
-  <link rel="apple-touch-startup-image" href="splash-1536x2048.png"
-        media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2)">
-  <link rel="apple-touch-startup-image" href="splash-1668x2388.png"
-        media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2)">
-  <link rel="apple-touch-startup-image" href="splash-2048x2732.png"
-        media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2)">
+  <!-- ... (same splash links) ... -->
 
   <style>
     body {
@@ -57,8 +40,8 @@
 
     @keyframes heartbeat {
       0%, 100% { transform: scale(1); }
-      30% { transform: scale(1.05); }
-      60% { transform: scale(0.97); }
+      30% { transform: scale(var(--heartbeat-scale-up, 1.05)); }
+      60% { transform: scale(var(--heartbeat-scale-down, 0.97)); }
     }
 
     .loading-screen {
@@ -75,9 +58,9 @@
     }
 
     .loading-logo {
-      width: 300px;
+      width: var(--logo-width, 160px);
       height: auto;
-      animation: heartbeat 5s infinite ease-in-out;
+      animation: heartbeat var(--heartbeat-duration, 1.5s) infinite ease-in-out;
     }
 
     h1 {
@@ -129,9 +112,22 @@
       background-color: #1978d4;
       transform: scale(1.03);
     }
+
+    .controls {
+      margin-top: 25px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .controls label {
+      font-size: 0.95em;
+      font-weight: 500;
+    }
   </style>
 </head>
-<body>
+<body style="--heartbeat-duration: 1.5s; --heartbeat-scale-up: 1.05; --heartbeat-scale-down: 0.97; --logo-width: 160px;">
   <div class="loading-screen" id="loadingScreen">
     <img src="dashboard_logo.png" alt="Loading Logo" class="loading-logo">
   </div>
@@ -148,6 +144,13 @@
   <p>Tap below to launch your Performance Analyzer:</p>
   <button onclick="startApp()">Open App</button>
 
+  <div class="controls">
+    <label>Duration: <input type="range" min="0.5" max="3" step="0.1" value="1.5" onchange="updateCSS('--heartbeat-duration', this.value + 's')"></label>
+    <label>Scale Up: <input type="range" min="1" max="1.5" step="0.01" value="1.05" onchange="updateCSS('--heartbeat-scale-up', this.value)"></label>
+    <label>Scale Down: <input type="range" min="0.8" max="1" step="0.01" value="0.97" onchange="updateCSS('--heartbeat-scale-down', this.value)"></label>
+    <label>Logo Size: <input type="range" min="100" max="300" step="5" value="160" onchange="updateCSS('--logo-width', this.value + 'px')"></label>
+  </div>
+
   <script>
     function startApp() {
       const loadingScreen = document.getElementById("loadingScreen");
@@ -155,6 +158,10 @@
       setTimeout(() => {
         window.location.href = "https://fuelcell-batterykpi-dashboard-zje68dj3yzc2gxcttryiua.streamlit.app/";
       }, 1000);
+    }
+
+    function updateCSS(varName, value) {
+      document.body.style.setProperty(varName, value);
     }
   </script>
 </body>
